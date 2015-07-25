@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Online Positioning system</title>
+	<!-- CSS -->
+		<!-- Components -->
+			<link rel="stylesheet" href="css/components/jquery.mobile.flatui.css">
+			<!-- <link rel="stylesheet" href="css/components/jquery.mobile.squareui.css"> -->
+			<link rel="stylesheet" href="css/components/jqm-fa-isvg-ipng.css">
+			<link rel="stylesheet" href="css/components/intlTelInput.css">
+		<!-- Application Style -->
+			<link rel="stylesheet" href="css/app.css">
+	<!-- Components Scripts -->
+		<!-- Apache Cordova JavaScript -->
+			<script src="cordova.js"></script>
+
+		<!-- Components and APIs-->
+			<!-- Google Map -->
+				<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+			<!-- jQuery -->
+				<script src="js/components/jquery.js"></script>
+				<script src="js/components/jquery.mobile.js"></script>
+			<!-- International telephone input handler -->
+				<script src="js/components/intl-tel-input/intlTelInput.js"></script>
+				<script src="js/components/intl-tel-input/utils.js"></script>
+			<!-- Word Prularizer!! -->
+				<script src="js/components/pluralize.js"></script>
+		<!-- /Components and APIs-->
+
+</head>
+<body>
+	<!-- Main Page -->
+		<div id="first-page" data-role="page" class="page ui-responsive-panel" data-theme="b">
+			<div id="first-page-sidebar" data-role="panel" data-position="right" data-display="push">
+				<ul id="first-page-sidebar-listview" class="listview" data-role="listview" data-filter="true" data-filter-placeholder="جستجو ..." data-filter-theme="f">
+				</ul>
+				<a id="history-panel-close-overlay-btn"class="close " data-icon="delete" data-iconpos="notext" data-role="button" data-rel="close" data-corners="all" data-theme="e" >close</a>
+			</div>
+			<div id="first-content" data-role="content" class="content">
+				<div class="map" id="map"></div>
+			</div>
+		</div>
+	<!-- Place Form -->
+		<div id="place-dialog" class="dialog page" data-role="page" data-dialog="true" data-theme="f">
+			<h1 data-role="header" class="text-center">Place</h1>
+			<div id="place-content" class="content" data-role="content">
+				<form action="">
+					<div class="rtl ui-field-contain">
+						<label for="name">عنوان</label>
+						<div data-role="controlgroup">
+							<input class="" type="text" name="title" placeholder="عنوان" />
+						</div>
+
+						<label for="address">آدرس: </label>
+						<div class="addresses" data-role="controlgroup">
+							<input data-corners="false" type="text" name="address" placeholder="آدرس">
+						</div>
+						
+						<label>تلفن: </label>
+						<fieldset class="phone-group ltr" data-role="controlgroup">
+							<input id="phone-1" type="tel" name="phone" class="phone ltr">
+							<input id="phone-2" type="tel" name="phone" class="phone ltr">
+						</fieldset>
+						<label for="description">توضیحات: </label>
+						<div class="description" data-role="controlgroup">
+							<textarea name="description" placeholder="درباره موقعیت"></textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	<!-- Morteza Page -->
+		<div id="morteza-page" data-role="page" class="page">
+			<div id="morteza-content" data-role="content" class="content">
+				<h2 class="rtl program text-center">
+					سیستم موقعیت یاب آنلاین این امکان را برای شما فراهم می‌کند تا مکانهای نزدیک خود ار پیدا کنید و یا نقاطی را که پیدا می‌کنید در آن علامت گذاری کنید و یا با دوستان خود به اشتراک بگذارید
+				</h2>
+				
+				<div class="person rtl">
+					<img class="photo centered text-center" src="img/logo.png" alt="تصویر مرتضی تورانی" />
+					<dl class="informations">
+						<dt><div  class="title">ایمیل:</div></dt>
+						<dd class="ltr text-center"><a href="mailto:morteza.tourani@gmail.com">morteza.tourani@gmail.com</a></dd>
+						<dt><div  class="title">شماره تماس:</div></dt>
+						<dd class="ltr text-center"><a href="tel:+989354443586">+989354443586</a></dd>
+						<dt><div  class="title">توضیحات:</div></dt>
+						<dd class="text-justify description">
+							<p class="ltr">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit omnis ea porro fugiat iusto ipsa nisi, saepe expedita at! Odit ipsum quaerat totam ex quae sequi voluptas ducimus architecto veritatis.
+							</p>
+							<p class="ltr">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							</p>
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	<!-- Widgets templates -->
+		<div id="widget-tempalte-container">
+			<!--  History panel listview list template -->
+				<div id="history-panel-li-template">
+					<li class="coordinate rtl icon-left icon-large" data-description="{{Title}}" data-id="{{ID}}" id="coordinate-{{index}}">
+						<a href="#" data-role="button" class="ui-icon-fa-gear icon-large ui-nodisc-icon">
+							<h3 class="text-right">{{Title}}</h3>
+							<span class="ui-li-count">{{distance}} ۱۰۰ متر</span>
+						</a>
+					</li>
+				</div>
+			<!-- /History panel listview list template -->
+		</div>
+
+	
+	<!-- Libraries -->
+		<script src="js/lib/_helpers.js"></script>
+		<script src="js/lib/_db.js"></script>
+		<script src="js/lib/_event.js"></script>
+		<script src="js/lib/prototypes.js"></script>
+		<script src="js/lib/Widget.js"></script>
+		<script src="js/lib/ListWidget.js"></script>
+		<script src="js/lib/ListviewWidget.js"></script>
+		<script src="js/lib/Page.js"></script>
+		<script src="js/lib/Map.js"></script>
+		<script src="js/lib/PanelWidget.js"></script>
+		<script src="js/lib/Place.js"></script>
+		<script src="js/lib/Coordinate.js"></script>
+		<script src="js/lib/PlaceForm.js"></script>
+		<script src="js/lib/History.js"></script>
+		<script src="js/lib/_test.js"></script>
+
+	<!-- Application Script -->
+		<script src="js/app.js"></script>
+</body>
+</html>

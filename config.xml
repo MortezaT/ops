@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget 
+	id="com.fresh.position" 
+	xmlns="http://www.w3.org/ns/widgets" 
+	xmlns:cdv="http://cordova.apache.org/ns/1.0"
+	version="0.0.1">
+
+	<name>Online Positioning System</name>
+	<description>
+		Online positioning system Show nearst places to you!
+	</description>
+	<author email="morteza.tourani@gmail.com" href="http://cordova.io">
+		Morteza Tourani
+	</author>
+	
+	<platform name="ubuntu">
+		<icon src="img/logo-by.png" />
+	</platform>
+	<platform name="android">
+		<icon src="drawable/android/drawable-ldpi/logo-by.png" density="ldpi" />
+		<icon src="drawable/android/drawable-mdpi/logo-by.png" density="mdpi" />
+		<icon src="drawable/android/drawable-hdpi/logo-by.png" density="hdpi" />
+		<icon src="drawable/android/drawable-xhdpi/logo-by.png" density="xhdpi" />
+
+		<splash src="drawable/android/drawable-ldpi/splash-land.png" density="land-ldpi"/>
+		<splash src="drawable/android/drawable-mdpi/splash-land.png" density="land-mdpi"/>
+		<splash src="drawable/android/drawable-hdpi/splash-land.png" density="land-hdpi"/>
+		<splash src="drawable/android/drawable-xhdpi/splash-land.png" density="land-xhdpi"/>
+
+		<splash src="drawable/android/drawable-ldpi/splash-port.png" density="port-ldpi"/>
+		<splash src="drawable/android/drawable-mdpi/splash-port.png" density="port-mdpi"/>
+		<splash src="drawable/android/drawable-hdpi/splash-port.png" density="port-hdpi"/>
+		<splash src="drawable/android/drawable-xhdpi/splash-port.png" density="port-xhdpi"/>
+	</platform>
+	
+	<content src="index.html" />
+	<access origin="*" />
+</widget>
