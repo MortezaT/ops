@@ -11,28 +11,52 @@
 	/*########################################################################################*/
 
 	/*################################### Object prototype ###################################*/
-
 		var _toDateTime = function () {
 			if (this === null || this === false) 
 				return null;
 			var d = new Date(this);
 			return (isNaN(d.valueOf())) ? null : d;
 		}
+		var _deepVal, _deepChild;
+		(function () {
 
-		var _deepVal = function (propertyChain) {
-			var levels = propertyChain.split('.');
-			parent = this;
-			for (var i = 0; i < levels.length; i++) {
-				if (!parent[levels[i]])
-					return ;
-				parent = parent[levels[i]];
+			function digger (parent, strPropertyChain, callback) {
+				var levels = strPropertyChain.split('.');
+				for (var i = 0; i < levels.length; i++) {
+					if (!parent[levels[i]] && !(callback && callback(parent, levels[i])))
+						return;
+					parent = parent[levels[i]];
+				}
+				return parent;
 			}
-			return parent;
+
+			_deepVal = function (strPropertyChain) {
+				return digger(this, strPropertyChain);
+			}
+
+			_deepChild = function (strPropertyChain) {
+				return digger(
+					this,
+					strPropertyChain,
+					function (object, property) {
+						object[property] = {};
+						return true;
+				});
+			}
+		})();
+
+		var _setVal = function (args) {
+			args = args || {};
+			if (args && typeOf(args) == typeOf({})) {
+				var object = this;
+
+				for (var attr in args)
+					object[attr] = args[attr];
+			};
+			return this;
 		}
-	/*################################### /Object prototype ###################################*/
 
 	/*#################################### Array prototype ####################################*/
-
 		var _sortBy = function() {
 			var fn = this.sort(
 				_dynamicSortMultipleFields.apply(null, arguments)
@@ -88,10 +112,8 @@
 		var _contains = function (value) {
 			return !!~this.indexOf(value);
 		}
-	/*################################### /Array prototype ###################################*/
 
 	/*################################### Number prototype ###################################*/
-
 		var _toRad = function (from) {
 			from = from || 'degree';
 			var value = this;
@@ -121,10 +143,8 @@
 				return value * 10 / 9;
 			};
 		}
-	/*################################### /Number prototype ###################################*/
 
 	/*################################### String prototype  ###################################*/
-
 		var _direction = function () {
 			var text = this,
 			half = parseInt(text.length / 2),
@@ -185,7 +205,7 @@
 			}
 			return str;
 		}
-	/*################################### /String prototype ###################################*/
+
 	/** 
 		* Calculate DateTime value of Object
 		* @method 	toDateTime
@@ -209,7 +229,9 @@
 	*/
 	new Methods({
 		toDateTime: _toDateTime,
-		deepVal: _deepVal
+		deepVal: _deepVal,
+		deepChild: _deepChild,
+		setVal: _setVal,
 	}, Object.prototype);
 
 	/**
