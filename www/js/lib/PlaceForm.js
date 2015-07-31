@@ -1,51 +1,74 @@
 "use strict";
+var PlaceForm = 
 (function () {
 	/**
-	* any thing to do with place data
+	* Any thing to do with place data
 	* Second Phone input handler with intlTellInput
 	*/
-	window.PlaceForm = function PlaceForm (args) {
-		args = args || {};
 
-		var that={},
+	var that = {},
+		args = {
+			model: Place(),
+			id: "place-form",
+			template: '',
+		};
+
+	Fields ({
+		phone: "object"
+	}, that);
+
+	Methods ({
+		refresh: function () {
+			$(that.selector()).trigger('create');
+		}
+	}, that);
+
+	PageWidget.call(that, args);
+
+	(function (parent) {
+		var base = {},
+			phone = that.Phone,
 			args = {
-				model: Place(),
-				id: "place-dialog",
-				template: '',
+				id: 			parent.id + "-phone-group",
+				itemElement: 	"input",
+				itemTemplate: 	document.getElementById("palce-form-phone-template").innerHTML
 			},
-			listviewargs = {
-				id: 			args.id + "-listview",
-				itemElement: 	"li",
-				itemTemplate: document.getElementById('history-panel-li-template').innerHTML,
-			},
-			phoneArgs = {
-				id: 			args.id + "-phonegroup",
-				itemElement: 	
-			},
+			intlargs = {
+				defaultCountry: "ir",
+				preferredCountries: ["ir",],
+				responsiveDropdown:true,
+				autoFormat:true,
+			};
 
+		ControlgroupWidget.call(phone, args);
 
-		phoneArgs.id = 'phone-' + ( args.id || 1 );
-		phoneArgs.itemTemplate = 
-			'<input id="' +
-				inputHandlerArgs.id +
-			'" type="tel" name="phone" class="phone ltr">';
+		base = {
+			refresh: phone.refresh,
+			add: phone.add
+		};
 
-		var that = new function Phone () {},
-			inputHandler = new function Phone () {};
-
-		
 		new Methods({
 			number: function () {
 				
 			},
-			add: function () {
-				that.Temp
+			add: function (phoneItem) {
+				if ( typeOf(phoneItem) !== typeOf(Phone()) || ! phoneItem.isValid() )
+					phoneItem = Phone();
+				base.add(phoneItem);
+			},
+			refresh: function () {
+				var view = $(phone.selector()),
+					parent = view.parent();
+				if (phone.data().length) {
+					parent.show();
+					base.refresh()
+					view.find(phone.ITEM_ELEMENT).intlTelInput(intlargs);
+				} else {
+					parent.hide();
+				}
 			}
-		}, inputHandler);
+		}, phone);
+	})(args);
 
-		/** Constructor */
-		that.Number = args.Number;
-
-		return that;
-	}
+	return that;
 })();
