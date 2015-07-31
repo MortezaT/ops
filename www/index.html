@@ -11,6 +11,10 @@
 			<!-- <link rel="stylesheet" href="css/components/jquery.mobile.squareui.css"> -->
 			<link rel="stylesheet" href="css/components/jqm-fa-isvg-ipng.css">
 			<link rel="stylesheet" href="css/components/intlTelInput.css">
+		<!-- Animations Style -->
+			<link rel="stylesheet" href="css/animation.css">
+		<!-- RTL Fix Style -->
+			<link rel="stylesheet" href="css/rtl.fix.css">
 		<!-- Application Style -->
 			<link rel="stylesheet" href="css/app.css">
 	<!-- Components Scripts -->
@@ -44,29 +48,30 @@
 			</div>
 		</div>
 	<!-- Place Form -->
-		<div id="place-dialog" class="dialog page" data-role="page" data-dialog="true" data-theme="f">
+		<div id="place-form" class="dialog page" data-role="page" data-dialog="true" data-theme="f">
 			<h1 data-role="header" class="text-center">Place</h1>
 			<div id="place-content" class="content" data-role="content">
 				<form action="">
-					<div class="rtl ui-field-contain">
-						<label for="name">عنوان</label>
-						<div data-role="controlgroup">
+					<div class="rtl form" data-role="controlgroup">
+						<div class="ui-field-contain rtl">
+							<label for="title">عنوان</label>
 							<input class="" type="text" name="title" placeholder="عنوان" />
 						</div>
 
-						<label for="address">آدرس: </label>
-						<div class="addresses" data-role="controlgroup">
-							<input data-corners="false" type="text" name="address" placeholder="آدرس">
+						<div class="ui-field-contain rtl">
+							<label for="address">آدرس</label>
+							<input type="text" name="address" placeholder="آدرس">
 						</div>
-						
-						<label>تلفن: </label>
-						<fieldset class="phone-group ltr" data-role="controlgroup">
-							<input id="phone-1" type="tel" name="phone" class="phone ltr">
-							<input id="phone-2" type="tel" name="phone" class="phone ltr">
-						</fieldset>
-						<label for="description">توضیحات: </label>
-						<div class="description" data-role="controlgroup">
-							<textarea name="description" placeholder="درباره موقعیت"></textarea>
+
+
+						<div id="place-form-phone" class="ui-field-contain rtl">
+							<label>تلفن</label>
+							<fieldset id="place-form-phone-group" class="phonegroup ltr" data-role="controlgroup">
+							</fieldset>
+						</div>
+						<div class="description ui-field-contain rtl">
+							<label for="description">توضیحات</label>
+							<textarea type="text" name="description" placeholder="درباره موقعیت"></textarea>
 						</div>
 					</div>
 				</form>
@@ -115,7 +120,10 @@
 						</a>
 					</li>
 				</div>
-			<!-- /History panel listview list template -->
+			<!-- Place Form phone input template -->
+			<div id="palce-form-phone-template">
+				<input type="tel" class="phone" id="phone-{{index}}" data-index="{{index}}" value="{{Number}}">
+			</div>
 		</div>
 
 	
@@ -127,7 +135,9 @@
 		<script src="js/lib/Widget.js"></script>
 		<script src="js/lib/ListWidget.js"></script>
 		<script src="js/lib/ListviewWidget.js"></script>
+		<script src="js/lib/ControlgroupWidget.js"></script>
 		<script src="js/lib/Page.js"></script>
+		<script src="js/lib/PageWidget.js"></script>
 		<script src="js/lib/Map.js"></script>
 		<script src="js/lib/PanelWidget.js"></script>
 		<script src="js/lib/Place.js"></script>
