@@ -11,7 +11,6 @@ var ListWidget;
 			"item template": args.itemTemplate,
 			"item element": args.itemElement,
 		}, that)
-
 		new Fields({
 			dataSource: {
 				type: 'object', 
@@ -23,21 +22,38 @@ var ListWidget;
 			render: function () {
 				that.clear();
 				var view = that.view(true),
-					data = (that.DataSource) ? that.DataSource.all() : that.data();
+					data = (that.DataSource && that.DataSource.all) ? that.DataSource.all() : that.data();
 				for (var i = 0; i < data.length; i++) {
-					var item = data[i].clone();
+					var item = data[i];
 					item.index = i + 1;
 					view.innerHTML += that.ITEM_TEMPLATE.format(item);
 				}
 				// console.info(view.innerHTML);
 				that.refresh();
 			},
-			delete: function (item) {
-				var id = item.data().id;
-
-				if (that.DataSource.find(id).delete())
-					item.remove();
-				return -1;
+			add: function (dataItem) {
+				if ( that.DataSource && that.DataSource.all ) {
+					// Add item to datasource and render again
+					console.error('Not implemented!!!!');
+					// try {} catch (ex) {}
+					// that.DataSource.add(dataItem);
+				} else {
+					that.data().push(dataItem);
+				}
+				that.render();
+			},
+			delete: function (dataItem) {
+				if ( that.DataSource && that.DataSource.all ) {
+					var id = dataItem.data().id;
+					try {
+						that.DataSource.find(id).delete()
+					} catch (ex) {}
+				} else {
+					var index = dataItem.data().index;
+					if (index)
+						that.data().splice(index - 1, 1);
+				}
+				that.render();
 			},
 			onCreate: function (callback) {
 				// body...
