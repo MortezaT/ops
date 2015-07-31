@@ -5,7 +5,8 @@ var typeOf,
 	Methods,
 	CaseConvert,
 	DataObject,
-	grabListFromArguments;
+	grabListFromArguments,
+	Animate;
 
 /*** CONSTs */
 var TYPE_DEFAULT = {
@@ -85,10 +86,11 @@ var TYPE_DEFAULT = {
 	}
 
 	Constants = function (consts, object) {
-		if (! consts)
-			throw "TOO_FEW_PARAMETERS_FOR_CONSTRUCTION";
+		if (! consts || !object)
+			throw "TOO_FEW_PARAMETERS_FOR_CONSTANT_ACCESSOR";
 		var constsAccessor	= {},
 			funType 		= typeOf(Function);
+			
 		for (var key in consts) {
 			var constant = consts[key],
 				constKey = CaseConvert(key).to_snake().get().toUpperCase(),
@@ -300,7 +302,7 @@ var TYPE_DEFAULT = {
 		return result;
 	}
 
-	window.Animate = function (object, args) {
+	Animate = function (object, args) {
 		// Check if the browser supports the transform (3D) CSS transition
 		if (!$.support.cssTransform3d) 
 			return args.callback();
@@ -313,4 +315,6 @@ var TYPE_DEFAULT = {
 				// function (e) { console.log(e); }
 				);
 	}
+
+	
 })();
