@@ -113,29 +113,6 @@ a.sign {
 	text-decoration: none;
 }
 
-/* Left transition */
-.swipeleft {
-	-webkit-transition: -webkit-transform 500ms ease;
-	-webkit-transform: translateX(-100%);
-	-moz-transition: -moz-transform 500ms ease;
-	-moz-transform: translateX(-100%);
-	-o-transition: -o-transform 500ms ease;
-	-o-transform: translateX(-100%);
-	transition: transform 500ms ease;
-	transform: translateX(-100%);
-}
-/* Right transition */
-.swiperight, .deleting {
-	-webkit-transition: -webkit-transform 500ms ease;
-	-webkit-transform: translateX(100%);
-	-moz-transition: -moz-transform 500ms ease;
-	-moz-transform: translateX(100%);
-	-o-transition: -o-transform 500ms ease;
-	-o-transform: translateX(100%);
-	transition: transform 500ms ease;
-	transform: translateX(100%);
-}
-
 #first-page-sidebar li:last-child {
 	padding-bottom: 3.2em !important;
 }
@@ -163,73 +140,42 @@ a.sign {
 /* *************************** international tel input *************************** */
 .intl-tel-input {
 	width: 100%;
-	/*direction: auto;*/
-	text-align: left;
+	display: block;
+}
+
+.intl-tel-input input {
+	text-indent: 1em;
 }
 
 .intl-tel-input input.iti-invalid-key {
 	background-color: #FFC7C7;
 }
-/* *************************** /international tel input *************************** */
 
-/* *************************** JQM input direction fix  *************************** */
-	.ui-input-text input{
-		text-align: initial;
-	}
-/* *************************** /JQM direction fix  *************************** */
-/* *************************** RTL Fix *************************** */
-	.coordinate a {
-		border-bottom: 1px solid #a4e2c1 !important;
-	}
-	.icon-left a {
-		padding-left: 2.5em !important;
-		padding-right: 1em !important;
-	}
-	.icon-left a:after {
-		right: auto;
-		left: 9px;
-		transform: scaleX(-1);
-	}
+/* *********************************** Place form rules *********************************** */
+#place-form-phone-group .ui-controlgroup-controls {
+	width: 100%;
+}
 
-	.icon-left a .ui-li-count {
-		left: 3.2em !important;
-		right: auto !important;
-	}
+#place-form .form {
+	margin-left: 1em;
+}
+/* ****************************** sidebar full page width on big screen ****************************** */
+	@media ( max-width: 45em ) {
 
-	.ui-field-contain.rtl > label,
-	.ui-field-contain.rtl .ui-controlgroup-label,
-	.ui-field-contain.rtl > .ui-rangeslider > label {
-		float: right;
-	}
+		/* wrap on narrow viewports once open */
+		.ui-panel-position-right, .ui-panel-position-left {
+			min-width: 98vw;
+		}
 
-	.ui-field-contain.rtl > label + [class*="ui-"],
-	.ui-field-contain.rtl .ui-controlgroup-controls
-	{
-		float:right;
-		text-align: right;
-	}
+		.ui-panel-page-content-open {
+			display: none;
+		}
 
-	.ui-field-contain .ui-input-text input,
-	.ui-field-contain .ui-input-search input {
-		text-align: auto;
+		.ui-panel-dismiss-open {
+			display: none;
+		}
 	}
-/* *************************** /RTL Fix *************************** */
-/* *********************************** sidebar full page width on big screen *********************************** */
-@media ( max-width: 45em ) {
-
-	/* wrap on narrow viewports once open */
-	.ui-panel-position-right, .ui-panel-position-left {
-		min-width: 98vw;
-	}
-
-	.ui-panel-page-content-open {
+	#widget-tempalte-container {
 		display: none;
 	}
 
-	.ui-panel-dismiss-open {
-		display: none;
-	}
-}
-#widget-tempalte-container {
-	display: none;
-}

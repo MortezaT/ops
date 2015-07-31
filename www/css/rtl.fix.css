@@ -1,0 +1,40 @@
+.coordinate a {
+	border-bottom: 1px solid #a4e2c1 !important;
+}
+.icon-left a {
+	padding-left: 2.5em !important;
+	padding-right: 1em !important;
+}
+.icon-left a:after {
+	right: auto;
+	left: 9px;
+	transform: scaleX(-1);
+}
+
+.icon-left a .ui-li-count {
+	left: 3.2em !important;
+	right: auto !important;
+}
+
+.ui-field-contain.rtl > label,
+.ui-field-contain.rtl .ui-controlgroup-label,
+.ui-field-contain.rtl > .ui-rangeslider > label {
+	float: right;
+}
+
+.ui-field-contain.rtl > label + [class*="ui-"],
+.ui-field-contain.rtl .ui-controlgroup-controls
+{
+	float:right;
+	text-align: right;
+}
+
+.ui-field-contain .ui-input-text input,
+.ui-field-contain .ui-input-search input {
+	text-align: auto;
+}
+
+/* *************************** JQM input direction fix  *************************** */
+	.ui-input-text input{
+		text-align: initial;
+	}

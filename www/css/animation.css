@@ -1,0 +1,22 @@
+/* Left transition */
+.swipeleft {
+	-webkit-transition: -webkit-transform 500ms ease;
+	-webkit-transform: translateX(-100%);
+	-moz-transition: -moz-transform 500ms ease;
+	-moz-transform: translateX(-100%);
+	-o-transition: -o-transform 500ms ease;
+	-o-transform: translateX(-100%);
+	transition: transform 500ms ease;
+	transform: translateX(-100%);
+}
+/* Right transition */
+.swiperight, .deleting {
+	-webkit-transition: -webkit-transform 500ms ease;
+	-webkit-transform: translateX(100%);
+	-moz-transition: -moz-transform 500ms ease;
+	-moz-transform: translateX(100%);
+	-o-transition: -o-transform 500ms ease;
+	-o-transform: translateX(100%);
+	transition: transform 500ms ease;
+	transform: translateX(100%);
+}
