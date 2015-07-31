@@ -16,6 +16,7 @@
 		var that = this,
 			position = args.position &&  DEFAULT.POSITION[position] || DEFAULT.POSITION.left,
 			display = args.displayType &&  DEFAULT.DISPLAY[displayType] || DEFAULT.DISPLAY.reveal;
+		args.role = "panel"
 		Widget.call(that, args);
 		
 		new Methods({
